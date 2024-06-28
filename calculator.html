@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CALCULATOR</title>
+</head>
+<body>
+  <form method="post" action="p1.php">
+    Valor 1 <input type="text" name="d1" id="d1">
+    <br><br>
+    Valor 2 <input type="text" name="d2" id="d2">
+    <button type="submit">Calcular</button>
+  </form>
+  <br>
+  <div id="resultados"></div>
+
+  <script src="jquery.js"></script>
+
+  <script>
+    let x = $(document)
+    x.ready(inicializarEventos)
+
+    function inicializarEventos() {
+      let x = $("#b1")
+      x.click(fuera)
+    }
+
+    function fuera() {
+      let x = $("#d1").val();
+      let y = $("#d2").val();
+      $.ajax({
+        async:true,
+        type:"POST",
+        dataType:"html",
+        url:"p1.php",
+        data:{d1:x,d2:y},
+        beforeSend:llego,
+        success:llegada,
+        timeout:5000, // segundos de chance para que se ejecute
+        error:problemas // si pasa el timeout entonces que arroje un error
+    })
+    return false
+    }
+
+
+    function llego() {
+      let x = $("#resultados")
+      x.html("<h2>Cargando</h2>") // poner imagen de loading
+    }
+
+    function llegada(datos) {
+      $("#resultados").text(datos)
+    }
+
+    function problemas() {
+      $("#resultados").text("Intente luego")
+    }
+  </script>
+  
+</body>
+</html>
