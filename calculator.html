@@ -10,9 +10,8 @@
     Valor 1 <input type="text" name="d1" id="d1">
     <br><br>
     Valor 2 <input type="text" name="d2" id="d2">
-    <button type="submit">Calcular</button>
+    <button type="submit" id="b1">Calcular</button>
   </form>
-  <br>
   <div id="resultados"></div>
 
   <script src="jquery.js"></script>
@@ -34,7 +33,7 @@
         type:"POST",
         dataType:"html",
         url:"p1.php",
-        data:{d1:x,d2:y},
+        data:{d1:x, d2:y},
         beforeSend:llego,
         success:llegada,
         timeout:5000, // segundos de chance para que se ejecute
@@ -42,7 +41,6 @@
     })
     return false
     }
-
 
     function llego() {
       let x = $("#resultados")
